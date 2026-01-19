@@ -39,5 +39,8 @@ public class Task {
         return this.status;
     }
     
-    
+    void setStatus(Status updatedStatus){
+        this.status = updatedStatus;
+
+    }
 }
