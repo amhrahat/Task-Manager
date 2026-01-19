@@ -13,10 +13,11 @@ public class Main {
         while(true){
             System.out.print("Welcome to Task Managemet\n" +
             "1. View Tasks\n" +
-            "2. Add Task\n" +
-            "3. Delete Task\n" +
-            "4. Change Task Status\n" + 
-            "5. Exit\n" +
+            "2. Show Task Description\n" +
+            "3. Add Task\n" +
+            "4. Delete Task\n" +
+            "5. Change Task Status\n" + 
+            "6. Exit\n" +
             "Enter an option: ");
 
             int num = scanner.nextInt();
@@ -28,19 +29,22 @@ public class Main {
                     viewTasks(tasks);
                     break;
 
-
                 case 2 :
+                    showTaskDescription(scanner, tasks);
+                    break;
+                case 3 :
                     addTasks(scanner, tasks);
                     break;
 
-                case 3 :
+                case 4 :
                     deleteTask(scanner, tasks);
                     break;
 
-                case 4 :
+                case 5 :
                     updateStatus(scanner, tasks);
                     break;
-                case 5 :
+
+                case 6 :
                     System.out.println("Existing..");
                     scanner.close();
                     return;
@@ -81,6 +85,9 @@ public class Main {
         }
     }
 
+    static void showTaskDescription(Scanner scanner, ArrayList<Task> tasks){
+        
+    }
 
 
     static void addTasks(Scanner scanner, ArrayList<Task> tasks){
@@ -112,6 +119,7 @@ public class Main {
         if (removeIndex != -1){
             System.out.println(tasks.get(removeIndex).getTitle() + " is deleted with id " + tasks.get(removeIndex).getId());
             tasks.remove(removeIndex);
+            viewTasks(tasks);
 
         }
         else{
@@ -135,7 +143,7 @@ public class Main {
         Task taskChangeStatus =  tasks.get(changeIndex);
 
         System.out.println("Enter an option to update status of task with id " + taskChangeStatus.getId());
-        System.out.print("Status to Choose: \n" + 
+        System.out.println("Status to Choose: \n" + 
             "1. PENDING\n" +
             "2. IN_PROGRESS\n" +
             "3. DONE");
@@ -157,7 +165,8 @@ public class Main {
                 System.out.println("Invalid option");
                 return;
         }
-
+        System.out.println("Task with id " + taskChangeStatus.getId() + " status updated");
+        viewTasks(tasks);
         }
         else{
             System.out.println("Task is not found!");
