@@ -13,8 +13,8 @@ public class Main {
         while(true){
             System.out.print("Welcome to Task Managemet\n" +
             "1. View Tasks\n" +
-            "2. Show Task Description\n" +
-            "3. Add Task\n" +
+            "2. Add Task\n" +
+            "3. Show Task Description\n" +
             "4. Delete Task\n" +
             "5. Change Task Status\n" + 
             "6. Exit\n" +
@@ -30,10 +30,11 @@ public class Main {
                     break;
 
                 case 2 :
-                    showTaskDescription(scanner, tasks);
-                    break;
-                case 3 :
                     addTasks(scanner, tasks);
+                    break;
+
+                case 3 :
+                    showTaskDescription(scanner, tasks);
                     break;
 
                 case 4 :
@@ -48,6 +49,7 @@ public class Main {
                     System.out.println("Existing..");
                     scanner.close();
                     return;
+
                 default :
                     System.out.println("Invalid option");
                     return;
@@ -68,7 +70,8 @@ public class Main {
     static void viewTasks(ArrayList<Task> tasks){
 
         if (tasks.size() == 0){
-            System.out.println("No task currently");
+            System.out.println("No task currently.");
+            System.out.println();
             return;
             
         }
@@ -86,7 +89,23 @@ public class Main {
     }
 
     static void showTaskDescription(Scanner scanner, ArrayList<Task> tasks){
-        
+        viewTasks(tasks);
+        System.out.print("Type id number of the task to see the description: ");
+        int idNum = scanner.nextInt();
+        scanner.nextLine();
+
+        int desIndex = getTaskByIndex(tasks, idNum);
+        if (desIndex != -1){
+            String taskDescription = tasks.get(desIndex).getDescription();
+            System.out.println(taskDescription);
+            System.out.println();
+            viewTasks(tasks);
+
+        }
+        else{
+            System.out.println("Task is not found!");
+        }
+
     }
 
 
@@ -104,6 +123,7 @@ public class Main {
         System.out.println(task.getTitle() + " is added with id " + task.getId());
         System.out.println();
         tasks.add(task);
+        viewTasks(tasks);
     }
 
 
@@ -119,6 +139,7 @@ public class Main {
         if (removeIndex != -1){
             System.out.println(tasks.get(removeIndex).getTitle() + " is deleted with id " + tasks.get(removeIndex).getId());
             tasks.remove(removeIndex);
+            System.out.println();
             viewTasks(tasks);
 
         }

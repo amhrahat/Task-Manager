@@ -35,6 +35,10 @@ public class Task {
         return this.title;
     }
 
+    String getDescription(){
+        return this.description;
+    }
+
     Status getStatus(){
         return this.status;
     }
