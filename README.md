@@ -19,6 +19,16 @@ Task-Manager/
 ├─ Dockerfile # Docker configuration
 └─ README.md
 
+## Project Structure
+
+Task-Manager/
+├─ src/
+│  ├─ app/       # Main application entry point
+│  ├─ model/     # Task and Status classes
+│  └─ service/   # TaskManager service for operations
+├─ Dockerfile    # Docker configuration
+└─ README.md
+
 
 ## How to Run
 ```bash
