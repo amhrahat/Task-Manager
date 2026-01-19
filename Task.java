@@ -1,10 +1,17 @@
 public class Task {
 
+    enum Status{
+        PENDING,
+        IN_PROGRESS,
+        DONE
+    }
+
     static int taskId = 1;
 
     private int id;
     private String title;
     private String description;
+    private Status status;
 
     static int getTaskId(){
         return Task.taskId;
@@ -16,6 +23,7 @@ public class Task {
         this.id = taskId++;
         this.title = tittle;
         this.description = description;
+        this.status = Status.PENDING;
         
     }
 
@@ -26,5 +34,10 @@ public class Task {
     String getTitle(){
         return this.title;
     }
+
+    Status getStatus(){
+        return this.status;
+    }
+    
     
 }

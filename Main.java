@@ -1,10 +1,11 @@
 import java.util.Scanner;
-
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
 
         Scanner input = new Scanner(System.in);
+        ArrayList<Task> tasks = new ArrayList<Task>();
 
         while(true){
             System.out.print("Welcome to Task Managemet\n" +
@@ -16,19 +17,31 @@ public class Main {
             int num = input.nextInt();
             input.nextLine();
             switch(num){
-                case 1 : 
-
-
+                case 1 :  
+                    int count = 1;
+                    for (Task task : tasks){
+                        int taskId = task.getId();
+                        String taskTitle = task.getTitle();
+                        Task.Status taskStatus = task.getStatus();
+                        String output = String.format("%d | %s | %s", taskId, taskTitle, taskStatus);
+                        System.out.println(output);
+          
+                    }
+                    break;
                 case 2 :
-                System.out.print("Give title: ");
-                String title = input.nextLine();
+                    System.out.print("Give title: ");
 
-                System.out.print("Give Description: ");
-                String description = input.nextLine();
+                    String title = input.nextLine();
+                    System.out.print("Give Description: ");
 
-                Task task = new Task (title, description);
-                System.out.println(task.getTitle() + " is added with id " + task.getId());
-                System.out.println();
+                    String description = input.nextLine();
+                    Task task = new Task (title, description);
+
+                    System.out.println();
+                    System.out.println(task.getTitle() + " is added with id " + task.getId());
+                    System.out.println();
+                    tasks.add(task);
+                    break;
 
             }
         }
