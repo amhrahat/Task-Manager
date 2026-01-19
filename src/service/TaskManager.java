@@ -1,64 +1,19 @@
+package src.service;
+
+import src.model.Task;
+import src.model.Status;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
+public class TaskManager {
 
-import java.util.ArrayList;
 
-public class Main {
-    public static void main(String[] args) {
+    private final ArrayList<Task> tasks = new ArrayList<>();
+    Scanner scanner = new Scanner(System.in);
 
-        Scanner scanner = new Scanner(System.in);
-        ArrayList<Task> tasks = new ArrayList<Task>();
-
-        while(true){
-            System.out.print("Welcome to Task Managemet\n" +
-            "1. View Tasks\n" +
-            "2. Add Task\n" +
-            "3. Show Task Description\n" +
-            "4. Delete Task\n" +
-            "5. Change Task Status\n" + 
-            "6. Exit\n" +
-            "Enter an option: ");
-
-            int num = scanner.nextInt();
-            scanner.nextLine();
-
-            switch(num){
-
-                case 1 :  
-                    viewTasks(tasks);
-                    break;
-
-                case 2 :
-                    addTasks(scanner, tasks);
-                    break;
-
-                case 3 :
-                    showTaskDescription(scanner, tasks);
-                    break;
-
-                case 4 :
-                    deleteTask(scanner, tasks);
-                    break;
-
-                case 5 :
-                    updateStatus(scanner, tasks);
-                    break;
-
-                case 6 :
-                    System.out.println("Existing..");
-                    scanner.close();
-                    return;
-
-                default :
-                    System.out.println("Invalid option");
-                    return;
-            }
-    
-        }
-    }
-
-    static int getTaskByIndex(ArrayList<Task> tasks, int idNum){
+    public int getTaskByIndex(int idNum){
         for(int taskIndex = 0; taskIndex < tasks.size(); taskIndex++ ){
             if (idNum  == tasks.get(taskIndex).getId()){
                 return taskIndex;
@@ -67,7 +22,7 @@ public class Main {
         return -1;
     }
 
-    static void viewTasks(ArrayList<Task> tasks){
+    public void viewTasks(){
 
         if (tasks.size() == 0){
             System.out.println("No task currently.");
@@ -80,7 +35,7 @@ public class Main {
         for (Task task : tasks){
             int taskId = task.getId();
             String taskTitle = task.getTitle();
-            Task.Status taskStatus = task.getStatus();
+            Status taskStatus = task.getStatus();
             String output = String.format("Task no: %d | Id: %d | %s | %s", count, taskId, taskTitle, taskStatus);
             count++;
             System.out.println(output);
@@ -88,18 +43,18 @@ public class Main {
         }
     }
 
-    static void showTaskDescription(Scanner scanner, ArrayList<Task> tasks){
-        viewTasks(tasks);
+    public void showTaskDescription(){
+        viewTasks();
         System.out.print("Type id number of the task to see the description: ");
         int idNum = scanner.nextInt();
         scanner.nextLine();
 
-        int desIndex = getTaskByIndex(tasks, idNum);
+        int desIndex = getTaskByIndex(idNum);
         if (desIndex != -1){
             String taskDescription = tasks.get(desIndex).getDescription();
             System.out.println(taskDescription);
             System.out.println();
-            viewTasks(tasks);
+            viewTasks();
 
         }
         else{
@@ -109,7 +64,7 @@ public class Main {
     }
 
 
-    static void addTasks(Scanner scanner, ArrayList<Task> tasks){
+    public void addTasks(){
             
         System.out.print("Give title: ");
 
@@ -123,24 +78,24 @@ public class Main {
         System.out.println(task.getTitle() + " is added with id " + task.getId());
         System.out.println();
         tasks.add(task);
-        viewTasks(tasks);
+        viewTasks();
     }
 
 
 
-    static void deleteTask(Scanner scanner, ArrayList<Task> tasks){
+    public void deleteTask(){
 
-        viewTasks(tasks);
+        viewTasks();
         System.out.print("Type id number of the task to delete: ");
         int idNum = scanner.nextInt();
         scanner.nextLine();
 
-        int removeIndex = getTaskByIndex(tasks, idNum);
+        int removeIndex = getTaskByIndex(idNum);
         if (removeIndex != -1){
             System.out.println(tasks.get(removeIndex).getTitle() + " is deleted with id " + tasks.get(removeIndex).getId());
             tasks.remove(removeIndex);
             System.out.println();
-            viewTasks(tasks);
+            viewTasks();
 
         }
         else{
@@ -150,44 +105,44 @@ public class Main {
 
     }
 
-    static void updateStatus(Scanner scanner, ArrayList<Task> tasks){
+    public void updateStatus(){
         
-        viewTasks(tasks);
+        viewTasks();
         System.out.print("Type id number of the task to change status: ");
         int idNum = scanner.nextInt();
         scanner.nextLine();
 
 
-        int changeIndex = getTaskByIndex(tasks, idNum);
+        int changeIndex = getTaskByIndex(idNum);
 
         if (changeIndex != -1){
         Task taskChangeStatus =  tasks.get(changeIndex);
 
-        System.out.println("Enter an option to update status of task with id " + taskChangeStatus.getId());
+        System.out.println("Choose an option to update status of task with id " + taskChangeStatus.getId());
         System.out.println("Status to Choose: \n" + 
             "1. PENDING\n" +
             "2. IN_PROGRESS\n" +
             "3. DONE");
-
+        System.out.print("Enter option: ");
         int option = scanner.nextInt();
         scanner.nextLine();
 
         switch(option){
             case 1 :
-                taskChangeStatus.setStatus(Task.Status.PENDING);
+                taskChangeStatus.setStatus(Status.PENDING);
                 break;
             case 2 :
-                taskChangeStatus.setStatus(Task.Status.IN_PROGRESS);
+                taskChangeStatus.setStatus(Status.IN_PROGRESS);
                 break;
             case 3 :
-                taskChangeStatus.setStatus(Task.Status.DONE);
+                taskChangeStatus.setStatus(Status.DONE);
                 break;
             default :
                 System.out.println("Invalid option");
                 return;
         }
         System.out.println("Task with id " + taskChangeStatus.getId() + " status updated");
-        viewTasks(tasks);
+        viewTasks();
         }
         else{
             System.out.println("Task is not found!");
@@ -196,4 +151,5 @@ public class Main {
 
 
     }
+    
 }

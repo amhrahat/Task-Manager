@@ -1,10 +1,7 @@
+package src.model;
 public class Task {
 
-    enum Status{
-        PENDING,
-        IN_PROGRESS,
-        DONE
-    }
+
 
     static int taskId = 1;
 
@@ -19,7 +16,7 @@ public class Task {
 
 
 
-    Task(String tittle, String description){
+    public Task(String tittle, String description){
         this.id = taskId++;
         this.title = tittle;
         this.description = description;
@@ -27,23 +24,23 @@ public class Task {
         
     }
 
-    int getId(){
+    public int getId(){
         return this.id;
     }
 
-    String getTitle(){
+    public String getTitle(){
         return this.title;
     }
 
-    String getDescription(){
+    public String getDescription(){
         return this.description;
     }
 
-    Status getStatus(){
+    public Status getStatus(){
         return this.status;
     }
     
-    void setStatus(Status updatedStatus){
+    public void setStatus(Status updatedStatus){
         this.status = updatedStatus;
 
     }
