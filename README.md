@@ -7,29 +7,6 @@ A simple command-line Task Management application written in Java, demonstrating
 - Update task status  
 - Delete tasks  
 
-## Project Structure
-
-Task-Manager/
-│
-├─ src/
-│ ├─ app/ # Main application entry point
-│ ├─ model/ # Task and Status classes
-│ └─ service/ # TaskManager service for operations
-│
-├─ Dockerfile # Docker configuration
-└─ README.md
-
-## Project Structure
-
-Task-Manager/
-├─ src/
-│  ├─ app/       # Main application entry point
-│  ├─ model/     # Task and Status classes
-│  └─ service/   # TaskManager service for operations
-├─ Dockerfile    # Docker configuration
-└─ README.md
-
-
 ## How to Run
 ```bash
 git clone https://github.com/amhrahat/Task-Manager.git
